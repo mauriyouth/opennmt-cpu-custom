@@ -1,7 +1,7 @@
 FROM kaixhin/torch
 
 RUN luarocks install dkjson
-RUN luarocks install lua-zmq ZEROMQ_LIBDIR=/usr/lib/x86_64-linux-gnu/ ZEROMQ_INCDIR=/usr/include
+# RUN luarocks install lua-zmq ZEROMQ_LIBDIR=/usr/lib/x86_64-linux-gnu/ ZEROMQ_INCDIR=/usr/include
 RUN luarocks install sundown
 RUN luarocks install cwrap
 RUN luarocks install paths
