@@ -23,7 +23,6 @@ RUN luarocks install nnx
 RUN luarocks install threads
 RUN luarocks install graphicsmagick
 RUN luarocks install argcheck
-RUN luarocks install audio
 RUN luarocks install signal
 RUN luarocks install bit32
 RUN luarocks install restserver-xavante
