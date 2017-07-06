@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 RUN git clone https://github.com/xianyi/OpenBLAS.git /tmp/OpenBLAS  || { echo "Error. Cannot clone OpenBLAS." >&2 ; exit 1 ; } \
     && cd /tmp/OpenBLAS || { echo "Error. Cannot create tempdir." >&2 ; exit 1 ; }
 
-RUN cd /tmp/OpenBLAS && make NO_AFFINITY=1 USE_OPENMP=1
+RUN cd /tmp/OpenBLAS && make NO_AFFINITY=1 USE_THREAD=1 USE_OPENMP=1
 
 RUN cd /tmp/OpenBLAS && make install
 
