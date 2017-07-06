@@ -16,8 +16,11 @@ RUN apt-get update && apt-get install -y \
   libpng-dev ncurses-dev imagemagick libzmq3-dev gfortran \
   unzip gnuplot gnuplot-x11 ipython
 
+RUN git clone https://github.com/xianyi/OpenBLAS.git "$tempdir"/OpenBLAS  || { echo "Error. Cannot clone OpenBLAS." >&2 ; exit 1 ; } \
+    tempdir=$(mktemp -d) && cd "$tempdir"/OpenBLAS || { echo "Error. Cannot create tempdir." >&2 ; exit 1 ; } \
+    make NO_AFFINITY=1 USE_OPENMP=1 && make install
+
 RUN git clone https://github.com/torch/distro.git /root/torch --recursive && cd /root/torch && \
-  make NO_AFFINITY=1 USE_OPENMP=1 && make install\
   ./install.sh
 
 RUN luarocks install dkjson
