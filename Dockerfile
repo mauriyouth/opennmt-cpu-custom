@@ -17,8 +17,11 @@ RUN apt-get update && apt-get install -y \
   unzip gnuplot gnuplot-x11 ipython
 
 RUN git clone https://github.com/xianyi/OpenBLAS.git /tmp/OpenBLAS  || { echo "Error. Cannot clone OpenBLAS." >&2 ; exit 1 ; } \
-    && cd /tmp/OpenBLAS || { echo "Error. Cannot create tempdir." >&2 ; exit 1 ; } \
-    && make NO_AFFINITY=1 USE_OPENMP=1 && make install
+    && cd /tmp/OpenBLAS || { echo "Error. Cannot create tempdir." >&2 ; exit 1 ; }
+
+RUN cd /tmp/OpenBLAS && make NO_AFFINITY=1 USE_OPENMP=1
+
+RUN cd /tmp/OpenBLAS && make install
 
 RUN git clone https://github.com/torch/distro.git /root/torch --recursive && cd /root/torch && \
   ./install.sh
