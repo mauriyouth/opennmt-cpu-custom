@@ -1,4 +1,24 @@
-FROM kaixhin/torch
+FROM ubuntu:14.04
+
+MAINTAINER Mohamed Ahmednah <mauriyouth@gmail.com>
+
+RUN apt-get update && apt-get install -y \
+  git \
+  software-properties-common \
+  ipython3 \
+  libssl-dev \
+  libzmq3-dev \
+  python-zmq \
+  python-pip \
+  sudo \
+  build-essential gcc g++ curl \
+  cmake libreadline-dev git-core libqt4-dev libjpeg-dev \
+  libpng-dev ncurses-dev imagemagick libzmq3-dev gfortran \
+  unzip gnuplot gnuplot-x11 ipython
+
+RUN git clone https://github.com/torch/distro.git /root/torch --recursive && cd /root/torch && \
+  make NO_AFFINITY=1 USE_OPENMP=1 && make install\
+  ./install.sh
 
 RUN luarocks install dkjson
 # RUN luarocks install lua-zmq ZEROMQ_LIBDIR=/usr/lib/x86_64-linux-gnu/ ZEROMQ_INCDIR=/usr/include
